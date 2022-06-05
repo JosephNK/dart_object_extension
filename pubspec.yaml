@@ -9,6 +9,7 @@ environment:
 dependencies:
   build: ^2.3.0
   source_gen: ^1.2.2
+  analyzer: ^4.1.0
 
 dev_dependencies:
   flutter_lints: ^2.0.1
