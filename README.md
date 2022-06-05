@@ -15,7 +15,7 @@ Set the following in `pubspec.yaml`
 ```yaml
 dependencies:
   ...
-  dart_object_extension: ^0.0.1
+  dart_object_extension: latest
 
 dev_dependencies:
   ...
