@@ -1,3 +1,7 @@
+## [0.0.4]
+
+- Update structure.
+ 
 ## [0.0.3]
 
 - Update generator dissociation.
