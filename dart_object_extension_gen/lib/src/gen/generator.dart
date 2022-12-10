@@ -42,3 +42,14 @@ class ObjectCopyWithGenerator extends GeneratorForAnnotation<CopyWith> {
     ''';
   }
 }
+
+extension ObjectCopyWithGeneratorHelper on ObjectCopyWithGenerator {
+  // CopyWithAnnotation convertClassAnnotation(
+  //   ConstantReader reader,
+  // ) {
+  //   final constructor = reader.peek('constructor')?.stringValue;
+  //   return CopyWithAnnotation(
+  //     constructor: constructor,
+  //   );
+  // }
+}

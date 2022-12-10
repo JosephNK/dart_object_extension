@@ -8,10 +8,14 @@ part of 'person.dart';
 
 extension $PersonCopyWith on Person {
   Person copyWith(
-      {int Function()? id, String Function()? name, int? Function()? age}) {
+      {int Function()? id,
+      String Function()? name,
+      int? Function()? age,
+      String? Function()? dept}) {
     return Person(
         id: id != null ? id() : this.id,
         name: name != null ? name() : this.name,
-        age: age != null ? age() : this.age);
+        age: age != null ? age() : this.age,
+        dept: dept != null ? dept() : this.dept);
   }
 }

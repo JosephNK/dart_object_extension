@@ -22,6 +22,8 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
   build_runner: ^2.1.11
+  dart_object_extension_gen:
+    path: ../../dart_object_extension_gen
 
 flutter:
 
