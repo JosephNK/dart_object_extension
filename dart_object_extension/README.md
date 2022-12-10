@@ -20,6 +20,7 @@ dependencies:
 dev_dependencies:
   ...
   build_runner: ^2.1.11
+  dart_object_extension_gen: latest
 ```
 
 ## Annotation Example
