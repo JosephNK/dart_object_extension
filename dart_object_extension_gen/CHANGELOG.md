@@ -1,3 +1,7 @@
+## [0.0.5]
+
+- Update analyzer dependencies.
+
 ## [0.0.4]
 
 - Update structure.
