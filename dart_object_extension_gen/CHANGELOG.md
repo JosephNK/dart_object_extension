@@ -1,3 +1,7 @@
+## [0.0.6]
+
+- Added Generic Type.
+
 ## [0.0.5]
 
 - Update analyzer dependencies.

@@ -3,6 +3,8 @@ import 'package:build/build.dart';
 import 'package:dart_object_extension/dart_object_extension.dart';
 import 'package:source_gen/source_gen.dart';
 
+import 'helper.dart';
+
 class ObjectCopyWithGenerator extends GeneratorForAnnotation<CopyWith> {
   @override
   String generateForAnnotatedElement(
@@ -19,6 +21,8 @@ class ObjectCopyWithGenerator extends GeneratorForAnnotation<CopyWith> {
     final String className = classElement.name;
     final ConstructorElement? constructor = classElement.unnamedConstructor;
     final List<ParameterElement> parameters = constructor?.parameters ?? [];
+    final typeParametersAnnotation = typeParametersString(classElement, false);
+    final typeParametersNames = typeParametersString(classElement, true);
 
     List<String> params = [];
     List<String> copyParams = [];
@@ -33,23 +37,13 @@ class ObjectCopyWithGenerator extends GeneratorForAnnotation<CopyWith> {
     final paramsResult = params.join(',');
     final copyParamsResult = copyParams.join(',');
 
-    String classResult = 'return $className($copyParamsResult);';
+    String classResult =
+        'return $className$typeParametersAnnotation($copyParamsResult);';
 
     return '''
-    extension \$${className}CopyWith on $className {
+    extension \$${className}CopyWith$typeParametersAnnotation on $className$typeParametersNames {
       ${"$className copyWith({$paramsResult}){$classResult}"}
     }
     ''';
   }
-}
-
-extension ObjectCopyWithGeneratorHelper on ObjectCopyWithGenerator {
-  // CopyWithAnnotation convertClassAnnotation(
-  //   ConstantReader reader,
-  // ) {
-  //   final constructor = reader.peek('constructor')?.stringValue;
-  //   return CopyWithAnnotation(
-  //     constructor: constructor,
-  //   );
-  // }
 }
