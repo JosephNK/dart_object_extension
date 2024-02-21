@@ -1,3 +1,9 @@
+## [0.1.0]
+
+- Update gen packages.
+- Require analyzer: ^6.4.1
+- Bump the min sdk to 3.0.0.
+
 ## [0.0.6]
 
 - Update gen packages.
