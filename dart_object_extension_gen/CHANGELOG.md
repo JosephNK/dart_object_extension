@@ -1,3 +1,7 @@
+## [0.1.1]
+
+- Update packages.
+
 ## [0.1.0]
 
 - Require analyzer: ^6.4.1

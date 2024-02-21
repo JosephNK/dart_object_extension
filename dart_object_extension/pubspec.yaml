@@ -1,13 +1,13 @@
 name: dart_object_extension
 description: This plugin extends the functionality of the object class.
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/JosephNK/dart_object_extension
 
 environment:
   sdk: ^3.0.0
 
 dependencies:
-  meta: ^1.12.0
+  meta: ^1.11.0
 
 dev_dependencies:
   flutter_lints: ^3.0.1
