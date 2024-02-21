@@ -12,10 +12,10 @@ class PersonGeneric<ParentDataType> extends Parent {
   final String? dept;
 
   const PersonGeneric({
-    ParentDataType? data,
+    ParentDataType? super.data,
     required this.id,
     required this.name,
     this.age,
     this.dept,
-  }) : super(data: data);
+  });
 }
