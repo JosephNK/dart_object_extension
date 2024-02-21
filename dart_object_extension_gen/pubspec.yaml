@@ -10,7 +10,7 @@ dependencies:
   analyzer: ^6.4.1
   build: ^2.4.1
   source_gen: ^1.5.0
-  dart_object_extension: ^0.1.0
+  dart_object_extension: ^0.1.1
 
 dev_dependencies:
   flutter_lints: ^3.0.1
