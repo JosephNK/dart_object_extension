@@ -1,6 +1,6 @@
 name: dart_object_extension
 description: This plugin extends the functionality of the object class.
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/JosephNK/dart_object_extension
 
 environment:
