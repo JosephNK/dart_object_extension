@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               _person.name,
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
           ],
         ),

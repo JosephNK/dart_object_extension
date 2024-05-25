@@ -8,7 +8,7 @@ part of 'person_generic.dart';
 
 extension $PersonGenericCopyWith<ParentDataType>
     on PersonGeneric<ParentDataType> {
-  PersonGeneric copyWith(
+  PersonGeneric<ParentDataType> copyWith(
       {ParentDataType? Function()? data,
       int Function()? id,
       String Function()? name,
