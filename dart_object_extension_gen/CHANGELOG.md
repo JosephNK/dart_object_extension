@@ -1,3 +1,8 @@
+## [0.1.2]
+
+- Fixed the issue with the generic type.
+- Update dependencies.
+
 ## [0.1.1]
 
 - Update packages.
