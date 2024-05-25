@@ -42,7 +42,7 @@ class ObjectCopyWithGenerator extends GeneratorForAnnotation<CopyWith> {
 
     return '''
     extension \$${className}CopyWith$typeParametersAnnotation on $className$typeParametersNames {
-      ${"$className copyWith({$paramsResult}){$classResult}"}
+      ${"$className$typeParametersAnnotation copyWith({$paramsResult}){$classResult}"}
     }
     ''';
   }
