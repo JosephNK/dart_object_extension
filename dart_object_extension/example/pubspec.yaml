@@ -21,11 +21,10 @@ dev_dependencies:
 
   flutter_lints: ^4.0.0
 
-  build_runner: ^2.4.10
+  build_runner: ^2.4.15
 
   dart_object_extension_gen:
     path: ../../dart_object_extension_gen
 
 flutter:
-
   uses-material-design: true

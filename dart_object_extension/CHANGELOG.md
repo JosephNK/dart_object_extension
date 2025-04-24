@@ -1,3 +1,7 @@
+## [0.2.0]
+
+- Update dependencies.
+
 ## [0.1.3]
 
 - `meta` 1.12.0 downgrade.
