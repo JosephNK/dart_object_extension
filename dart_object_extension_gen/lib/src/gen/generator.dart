@@ -18,9 +18,10 @@ class ObjectCopyWithGenerator extends GeneratorForAnnotation<CopyWith> {
     }
 
     final ClassElement classElement = element;
-    final String className = classElement.name;
+    final String className = classElement.name ?? '';
     final ConstructorElement? constructor = classElement.unnamedConstructor;
-    final List<ParameterElement> parameters = constructor?.parameters ?? [];
+    final List<FormalParameterElement> parameters =
+        constructor?.formalParameters ?? [];
     final typeParametersAnnotation = typeParametersString(classElement, false);
     final typeParametersNames = typeParametersString(classElement, true);
 

@@ -2,13 +2,7 @@ import 'package:analyzer/dart/element/element.dart';
 
 String typeParametersString(ClassElement classElement, bool nameOnly) {
   final names = classElement.typeParameters
-      .map(
-        (e) => nameOnly ? e.name : e.getDisplayString(withNullability: true),
-      )
+      .map((e) => nameOnly ? e.displayName : e.displayString())
       .join(',');
-  if (names.isNotEmpty) {
-    return '<$names>';
-  } else {
-    return '';
-  }
+  return names.isNotEmpty ? '<$names>' : '';
 }
