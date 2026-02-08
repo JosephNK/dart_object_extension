@@ -24,5 +24,9 @@ doc/api/
 # Mac
 .DS_Store
 
+# Python
+.venv/
+__pycache__/
+
 # Exclude generated files for tests
 /dart_object_extension_gen/test/**/*.g.dart

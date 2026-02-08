@@ -19,7 +19,7 @@ dependencies:
 
 dev_dependencies:
   ...
-  build_runner: ^2.1.11
+  build_runner: latest
   dart_object_extension_gen: latest
 ```
 
