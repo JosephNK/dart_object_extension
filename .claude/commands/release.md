@@ -1,6 +1,6 @@
 ---
 description: 릴리스 워크플로우 (버전 동기화 + CHANGELOG + 커밋 + 배포)
-allowed-tools: Bash(poetry run sync-version:*), Bash(poetry run publish:*), Bash(git add:*), Bash(git status:*), Bash(git commit:*), Bash(git diff:*), Bash(git log:*)
+allowed-tools: Bash(poetry run sync-version:*), Bash(poetry run publish:*), Bash(git add:*), Bash(git status:*), Bash(git commit:*), Bash(git diff:*), Bash(git log:*), Bash(git tag:*), Bash(git push:*)
 argument-hint: <버전> (예: 0.4.0)
 ---
 
@@ -91,13 +91,24 @@ poetry run publish --dry-run
 - **WARN**: 경고 내용을 보여주고 계속 진행할지 사용자에게 확인
 - **OK**: 다음 단계로 진행
 
-### 6단계: 배포 확인
+### 6단계: Git 태그 생성 및 리모트 push
+
+버전 커밋에 태그를 생성하고 리모트에 push합니다 (`v` 접두사 없이):
+
+```bash
+git tag $ARGUMENTS
+git push origin main --tags
+```
+
+push 결과를 사용자에게 보여주세요.
+
+### 7단계: 배포 확인
 
 사용자에게 배포 진행 여부를 확인합니다:
 - "pub.dev에 두 패키지를 배포할까요?" (예/아니오)
 - "아니오" 선택 시 종료 (커밋은 유지)
 
-### 7단계: 배포 실행
+### 8단계: 배포 실행
 
 ```bash
 poetry run publish --force
