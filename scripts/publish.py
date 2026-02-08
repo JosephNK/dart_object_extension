@@ -168,10 +168,11 @@ def main() -> None:
     source_name, source_dir = PACKAGES[0]
     gen_name, gen_dir = PACKAGES[1]
 
-    ok = dry_run(source_name, source_dir) and dry_run(gen_name, gen_dir)
-    if not ok:
-        print("\n[ABORT] Fix dry-run errors before publishing.")
-        sys.exit(1)
+    if not force:
+        ok = dry_run(source_name, source_dir) and dry_run(gen_name, gen_dir)
+        if not ok:
+            print("\n[ABORT] Fix dry-run errors before publishing.")
+            sys.exit(1)
 
     if is_dry_run:
         print("\n[dry-run] All checks passed. No packages were published.")
@@ -189,6 +190,14 @@ def main() -> None:
         if not force and not confirm(f"Continue publishing {gen_name} anyway?"):
             print("\n[ABORT] Cancelled. Publish {gen_name} manually later.")
             sys.exit(1)
+
+    print(f"\n[pub-get] {gen_name} ...")
+    pub_get_result = run_flutter(gen_dir, ["get"])
+    if pub_get_result.returncode != 0:
+        print(f"  [FAIL] {gen_name} pub get failed:")
+        print(pub_get_result.stdout + "\n" + pub_get_result.stderr)
+        sys.exit(1)
+    print(f"  [OK] {gen_name} dependencies updated.")
 
     if not publish_package(gen_name, gen_dir, force):
         sys.exit(1)
