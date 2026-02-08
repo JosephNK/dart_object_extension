@@ -17,8 +17,8 @@ A Dart code generation library that automatically generates type-safe, null-safe
 
 | Package | Version | Description |
 |---------|---------|-------------|
-| [dart_object_extension](https://pub.dev/packages/dart_object_extension) | 0.3.0 | Annotation library (`@CopyWith`) |
-| [dart_object_extension_gen](https://pub.dev/packages/dart_object_extension_gen) | 0.3.0 | Code generator for `build_runner` |
+| [dart_object_extension](https://pub.dev/packages/dart_object_extension) | 0.4.0 | Annotation library (`@CopyWith`) |
+| [dart_object_extension_gen](https://pub.dev/packages/dart_object_extension_gen) | 0.4.0 | Code generator for `build_runner` |
 
 ## Requirements
 
@@ -30,11 +30,11 @@ Add the following to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  dart_object_extension: latest
+  dart_object_extension: 0.4.0
 
 dev_dependencies:
   build_runner: latest
-  dart_object_extension_gen: latest
+  dart_object_extension_gen: 0.4.0
 ```
 
 ## Usage

@@ -30,6 +30,8 @@ CHANGELOG_PATHS = {
     "dart_object_extension_gen": ROOT / "dart_object_extension_gen" / "CHANGELOG.md",
 }
 
+README_PATH = ROOT / "README.md"
+
 SOURCE_PKG = "dart_object_extension"
 GEN_PKG = "dart_object_extension_gen"
 
@@ -232,6 +234,38 @@ def generate_changelogs(
         update_changelog(pkg_name, new_version, entries)
 
 
+def update_readme(new_version: str) -> None:
+    """README.md 내 패키지 버전 번호를 업데이트한다."""
+    if not README_PATH.exists():
+        print("\n  README.md not found, skipped.")
+        return
+
+    content = README_PATH.read_text()
+    original = content
+
+    # 패키지 테이블: | [package_name](url) | X.Y.Z | description |
+    content = re.sub(
+        r"(\|\s*\[dart_object_extension(?:_gen)?\]\([^)]+\)\s*\|\s*)"
+        r"\d+\.\d+\.\d+"
+        r"(\s*\|)",
+        rf"\g<1>{new_version}\2",
+        content,
+    )
+
+    # pubspec 예시 코드블록: package_name: X.Y.Z
+    content = re.sub(
+        r"(dart_object_extension(?:_gen)?:\s+)\d+\.\d+\.\d+",
+        rf"\g<1>{new_version}",
+        content,
+    )
+
+    if content == original:
+        print("\n  README.md: no version references to update.")
+    else:
+        README_PATH.write_text(content)
+        print(f"\n  README.md: version references updated to {new_version}")
+
+
 def sync_to(
     new_version: str,
     custom_entries: list[str] | None = None,
@@ -258,6 +292,8 @@ def sync_to(
         deps[SOURCE_PKG] = new_dep
         save_yaml(gen_path, data, yaml)
         print(f"\n  {GEN_PKG} dependency {SOURCE_PKG}: {old_dep} -> {new_dep}")
+
+    update_readme(new_version)
 
     print("\nDone.")
 
