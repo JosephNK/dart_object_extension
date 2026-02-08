@@ -35,35 +35,23 @@ poetry run sync-version
 
 ### 2단계: 버전 동기화 + CHANGELOG 생성
 
-`poetry run sync-version $ARGUMENTS`를 실행합니다.
+git log에서 커밋 메시지를 분석하여 **영어** CHANGELOG 항목을 생성한 뒤, `-e` 플래그로 전달합니다.
+
+규칙:
+- 커밋 메시지를 분석하여 의미 있는 변경사항 추출
+- 영어로 간결하게 작성 (문장 끝에 마침표)
+- 기존 CHANGELOG 스타일 참고 (예: "Update dependencies.")
+- 중복 항목 제거
 
 ```bash
-poetry run sync-version $ARGUMENTS
+poetry run sync-version $ARGUMENTS -e "First entry." -e "Second entry."
 ```
 
 실행 결과를 사용자에게 보여주세요:
 - 생성된 CHANGELOG 항목
 - 변경된 pubspec.yaml 버전
 
-### 3단계: CHANGELOG 영문 정리
-
-sync-version이 생성한 CHANGELOG 항목은 커밋 메시지 기반이므로 한국어일 수 있습니다.
-두 패키지의 CHANGELOG.md를 읽고, 새로 추가된 버전 섹션의 항목을 **영어로 정리**하세요.
-
-규칙:
-- 기존 CHANGELOG 스타일과 일치하게 작성 (간결한 영문, 문장 끝에 마침표)
-- 한국어 항목은 영어로 번역
-- 이미 영어인 항목은 문체만 통일
-- 중복 항목 제거
-- 정리된 내용을 사용자에게 보여주고 확인 후 CHANGELOG.md에 반영
-
-예시:
-```
-Before: - 의존성 업데이트 및 SDK 버전 변경
-After:  - Update dependencies and SDK version.
-```
-
-### 4단계: 변경 내용 확인
+### 3단계: 변경 내용 확인
 
 변경된 파일을 확인합니다:
 
@@ -75,7 +63,7 @@ git diff
 - CHANGELOG.md 변경 내용 (두 패키지)
 - pubspec.yaml 버전 변경
 
-### 5단계: 버전 업데이트 커밋
+### 4단계: 버전 업데이트 커밋
 
 사용자 확인 후 커밋합니다.
 
@@ -91,7 +79,7 @@ git add -A
 git commit -m "chore: Update Version $ARGUMENTS"
 ```
 
-### 6단계: Dry-run 검증
+### 5단계: Dry-run 검증
 
 배포 전 dry-run으로 검증합니다:
 
@@ -103,13 +91,13 @@ poetry run publish --dry-run
 - **WARN**: 경고 내용을 보여주고 계속 진행할지 사용자에게 확인
 - **OK**: 다음 단계로 진행
 
-### 7단계: 배포 확인
+### 6단계: 배포 확인
 
 사용자에게 배포 진행 여부를 확인합니다:
 - "pub.dev에 두 패키지를 배포할까요?" (예/아니오)
 - "아니오" 선택 시 종료 (커밋은 유지)
 
-### 8단계: 배포 실행
+### 7단계: 배포 실행
 
 ```bash
 poetry run publish --force
@@ -124,5 +112,5 @@ poetry run publish --force
 다음 상황에서는 즉시 중단하고 사용자에게 알려주세요:
 - 커밋되지 않은 변경사항이 있는 경우 (1단계)
 - sync-version 실행 실패 (2단계)
-- dry-run 실패 (6단계)
+- dry-run 실패 (5단계)
 - 사용자가 취소한 경우

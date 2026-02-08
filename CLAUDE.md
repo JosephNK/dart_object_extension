@@ -96,8 +96,11 @@ poetry run sync-version
 # 동기화 상태 검증 (CI용)
 poetry run sync-version --check
 
-# 새 버전으로 동기화 + CHANGELOG 생성
+# 새 버전으로 동기화 + CHANGELOG 생성 (커밋 메시지 자동 추출)
 poetry run sync-version 0.4.0
+
+# 커스텀 영어 항목으로 동기화
+poetry run sync-version 0.4.0 -e "Modernize project." -e "Upgrade dependencies."
 
 # 배포 dry-run (실제 배포 안 함)
 poetry run publish --dry-run

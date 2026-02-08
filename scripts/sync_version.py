@@ -4,11 +4,13 @@ dart_object_extension / dart_object_extension_gen 버전 동기화 스크립트.
 사용법:
   poetry run sync-version                # 현재 버전 확인
   poetry run sync-version 0.4.0          # 두 패키지를 0.4.0으로 동기화 + CHANGELOG 생성
+  poetry run sync-version 0.4.0 -e "..." # 커스텀 CHANGELOG 항목으로 동기화
   poetry run sync-version --check        # 동기화 상태만 확인 (CI용)
 """
 
 from __future__ import annotations
 
+import argparse
 import re
 import sys
 from pathlib import Path
@@ -196,9 +198,20 @@ def update_changelog(pkg_name: str, new_version: str, entries: list[str]) -> Non
     print(f"  {pkg_name} CHANGELOG.md updated ({len(entries)} entries)")
 
 
-def generate_changelogs(new_version: str) -> None:
+def generate_changelogs(
+    new_version: str,
+    custom_entries: list[str] | None = None,
+) -> None:
     """git log에서 패키지별 변경사항을 추출하여 CHANGELOG를 업데이트한다."""
     print("\nGenerating changelogs ...")
+
+    if custom_entries:
+        print(f"\n  Using {len(custom_entries)} custom entries for both packages")
+        for entry in custom_entries:
+            print(f"    - {entry}")
+        for pkg_name in (SOURCE_PKG, GEN_PKG):
+            update_changelog(pkg_name, new_version, custom_entries)
+        return
 
     repo = Repo(ROOT)
     current_version = str(get_versions()[SOURCE_PKG])
@@ -219,10 +232,13 @@ def generate_changelogs(new_version: str) -> None:
         update_changelog(pkg_name, new_version, entries)
 
 
-def sync_to(new_version: str) -> None:
+def sync_to(
+    new_version: str,
+    custom_entries: list[str] | None = None,
+) -> None:
     print(f"Syncing all packages to version {new_version} ...")
 
-    generate_changelogs(new_version)
+    generate_changelogs(new_version, custom_entries)
 
     print("\nUpdating pubspec versions ...")
 
@@ -247,24 +263,41 @@ def sync_to(new_version: str) -> None:
 
 
 def main() -> None:
-    args = sys.argv[1:]
+    parser = argparse.ArgumentParser(
+        description="Sync versions and generate changelogs for dart_object_extension packages",
+    )
+    parser.add_argument(
+        "version",
+        nargs="?",
+        help="New version (X.Y.Z format)",
+    )
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="Check sync status only (CI mode)",
+    )
+    parser.add_argument(
+        "-e", "--entries",
+        action="append",
+        help="Custom changelog entry (can be used multiple times)",
+    )
 
-    if not args:
-        print_status()
-        return
+    args = parser.parse_args()
 
-    if args[0] == "--check":
+    if args.check:
         in_sync = check_sync()
         sys.exit(0 if in_sync else 1)
 
-    new_version = args[0]
+    if not args.version:
+        print_status()
+        return
 
-    parts = new_version.split(".")
+    parts = args.version.split(".")
     if len(parts) != 3 or not all(p.isdigit() for p in parts):
-        print(f"Error: Invalid version format '{new_version}'. Expected: X.Y.Z")
+        print(f"Error: Invalid version format '{args.version}'. Expected: X.Y.Z")
         sys.exit(1)
 
-    sync_to(new_version)
+    sync_to(args.version, args.entries)
 
 
 if __name__ == "__main__":
