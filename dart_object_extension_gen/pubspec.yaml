@@ -1,6 +1,6 @@
 name: dart_object_extension_gen
 description: This plugin extends the functionality of the object class.
-version: 0.3.0
+version: 0.4.0
 homepage: https://github.com/JosephNK/dart_object_extension
 
 environment:
@@ -10,7 +10,7 @@ dependencies:
   analyzer: ^10.0.0
   build: ^4.0.0
   source_gen: ^4.0.1
-  dart_object_extension: ^0.3.0
+  dart_object_extension: ^0.4.0
 
 dev_dependencies:
   flutter_lints: ^6.0.0
